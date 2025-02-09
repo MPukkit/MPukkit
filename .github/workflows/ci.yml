@@ -12,11 +12,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.7.0
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
       - name: Download BuildTools.jar
         run: wget https://hub.spigotmc.org/jenkins/job/BuildTools/189/artifact/target/BuildTools.jar
 
       - name: Run BuildTools.jar
-        run: wget java -Xmx1024M -jar BuildTools.jar
+        run: java -Xmx1024M -jar BuildTools.jar
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.6.0
