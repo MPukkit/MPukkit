@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download BuildTools.jar
+        run: wget https://hub.spigotmc.org/jenkins/job/BuildTools/189/artifact/target/BuildTools.jar
+
+      - name: Run BuildTools.jar
+        run: wget java -Xmx1024M -jar BuildTools.jar
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: .s
+          path: .
